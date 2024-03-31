@@ -34,7 +34,7 @@ export default function CreatePoll({ onCreatePoll }) {
     };
 
     try {
-      const response = await fetch('http://realtime-polling.vercel.app/api/polls', {
+      const response = await fetch('https://realtime-polling.vercel.app/api/polls', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

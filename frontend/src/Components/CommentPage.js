@@ -21,7 +21,7 @@ const CommentPage = () => {
   
 
   useEffect(() => {
-    const newSocket = io('http://localhost:5000');
+    const newSocket = io('http://realtime-polling.vercel.app:5000');
     setSocket(newSocket);
 
     return () => {

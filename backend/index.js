@@ -42,3 +42,7 @@ app.use('/api/pollResponses', require('./routes/pollResponses'));
 server.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
+
+app.get('/done', (req, res) => {
+  res.send('You are ready to go!');
+});

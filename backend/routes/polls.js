@@ -2,17 +2,23 @@ const express = require('express');
 const router = express.Router();
 const Poll = require('../models/Polls');
 const QRCode = require('qrcode');
-
+const os = require('os');
 module.exports = (io) => {
   // POST route to create a new poll
   router.post('/', async (req, res) => {
     try {
       const { question, options, userId, isActive } = req.body;
-      
+      const networkInterfaces = os.networkInterfaces();
+      const ipv4Address = Object.values(networkInterfaces)
+      .flat()
+      .filter((iface) => iface.family === 'IPv4' && !iface.internal)
+      .map((iface) => iface.address)[0];
+    
       // Create the poll
       const poll = await Poll.create({ question, options, userId, isActive });
   
-      // Generate QR code for poll ID
+      // Generate QR code for poll IDconst pollURL = `http://${ipv4Address}:3000/singlepoll/${poll.id}`;
+
       const pollURL = `http://localhost:3000/singlepoll/${poll.id}`;
       const qrCodeDataURL = await QRCode.toDataURL(pollURL);
       // const qrCodeData = JSON.stringify({ pollId: poll.id });
